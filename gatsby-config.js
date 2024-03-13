@@ -2,6 +2,7 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  pathPrefix: "/AI-Wellness-Assistant",
   siteMetadata: {
     title: `AIFinancialAwareness`,
     siteUrl: `https://www.yourdomain.tld`
