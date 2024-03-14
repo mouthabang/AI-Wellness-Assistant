@@ -8,7 +8,6 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: [
-    "gatsby-env-variables",
     "gatsby-plugin-postcss", 
     "gatsby-plugin-image", 
     "gatsby-plugin-sharp", 

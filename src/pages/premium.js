@@ -84,7 +84,7 @@ const PremiumPage = () => {
                     <StaticImage
                         alt="privacyPic1"
                         className="rounded-t-lg"
-                        src="../images/dataUsage.png"
+                        src="../images/MpesaUsage.png"
                         />
                     <h3 className="text-white pb-5 pt-5">Call Records Usage:</h3>
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StaticImage } from "gatsby-plugin-image";
-import { Link, navigate } from "gatsby-link";
-import { handleLogin } from "../services/auth";
+import {  navigate } from "gatsby-link";
 import Seo from "../components/Seo/seo";
 
 
