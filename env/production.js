@@ -1,3 +1,3 @@
 module.exports = {
-    API_ROOT: "https://lslkkussdshuat.vcl.corp:50500/sim-reg-api/web/website"
+    API_ROOT: "https://48fa-41-191-207-34.ngrok-free.app"
   }
