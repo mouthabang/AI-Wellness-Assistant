@@ -33,12 +33,12 @@ const IndexPage = () => {
             />
 
             <div>
-              <h3 className="index-heading text-center">AI Chatbot Who Really Helps</h3>
+              <h3 className="index-heading text-center">A.I Assistant That Really Helps</h3>
 
-              <p className="text-white text-center pt-10">F.W.A is the most friendly and fast chatbot ever made on the internet</p>
+              <p className="text-white text-center pt-10">F.W.A is the most friendly and fast assistant ever made on the internet</p>
             </div>
          
-          </div>
+          </div> 
           <button onClick={() => navigate("/home")} className="bg-blue-500 rounded-xl text-lg	 w-full text-gray-100 p-10 rounded hover:blue-600 transition-colors">Get Started</button>
 
           
@@ -48,7 +48,7 @@ const IndexPage = () => {
     <main className="flex items-center justify-center h-screen bg-gray-100">
       <form  onSubmit={handleSubmit}>
 
-        <h1 className="mb-4 text-center text-3xl ">Hi Tatolo Phahla</h1>
+        <h1 className="mb-4 text-center text-3xl ">Hi Masekate Mokotjo</h1>
         <div className="bg-white w-96 p-6 rounded shadow-sm">
           <div className="flex item-center justify-center mb-4">
               <StaticImage

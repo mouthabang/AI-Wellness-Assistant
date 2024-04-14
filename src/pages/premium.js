@@ -49,7 +49,7 @@ const PremiumPage = () => {
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                 </link>
                 <div className="p-5">
-                    <h2 className="text-center mb-5 name-heading">Hi Tatolo Phahla 👋</h2>
+                    <h2 className="text-center mb-5 name-heading">Hi Masekate Mokotjo 👋</h2>
 
                     <h3 className="text-white pb-5 pt-5">How can we help you?</h3>
 
@@ -89,7 +89,11 @@ const PremiumPage = () => {
                     <h3 className="text-white pb-5 pt-5">Call Records Usage:</h3>
 
                     <h4>Your Monthly data to date:</h4>
-
+                    <StaticImage
+                        alt="privacyPic1"
+                        className="rounded-t-lg"
+                        src="../images/callUsage.png"
+                        />
 
                 </div>
             </main>
@@ -97,7 +101,7 @@ const PremiumPage = () => {
     <main className="flex items-center justify-center h-screen bg-gray-100">
       <form  onSubmit={handleSubmit}>
 
-        <h1 className="mb-4 text-center text-3xl ">Hi Tatolo Phahla</h1>
+        <h1 className="mb-4 text-center text-3xl ">Hi Masekate Mokotjo</h1>
         <div className="bg-white w-96 p-6 rounded shadow-sm">
           <div className="flex item-center justify-center mb-4">
               <StaticImage

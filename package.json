@@ -16,6 +16,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.3",
     "autoprefixer": "^10.4.16",
+    "aws-sdk": "^2.1598.0",
+    "axios": "^1.6.7",
     "chart.js": "^3.7.0",
     "classname": "^0.0.0",
     "gatsby": "^5.12.12",

@@ -23,13 +23,13 @@ const IndexPage = () => {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         </link>
         <div className="p-5">
-          <h2 className="text-center mb-5 name-heading">Hi Tatolo Phahla 👋</h2>
+          <h2 className="text-center mb-5 name-heading">Hi Masekate Mokotjo 👋</h2>
 
           <div className=" h-200 p-6 rounded unlockBackground">
             <div className="grid grid-cols-2 md:grid-cols-2">
               <div>
                 <h3 className="name-heading pb-5 text-white">Premium Plan</h3>
-                <p className="pb-10 text-white"> Unlock your chatbot &  get all Premium Features</p>
+                <p className="pb-10 text-white"> Unlock your assistant & get all Premium Features</p>
 
                 <button onClick={() => navigate("/premium")} className="bg-blue-500 rounded-xl w-full text-sm text-gray-100 p-5 rounded hover:blue-600 transition-colors">Unlock F.A.W</button>
 
@@ -124,7 +124,7 @@ const IndexPage = () => {
     <main className="flex items-center justify-center h-screen bg-gray-100">
       <form  onSubmit={handleSubmit}>
 
-        <h1 className="mb-4 text-center text-3xl ">Hi Tatolo Phahla</h1>
+        <h1 className="mb-4 text-center text-3xl ">Hi Masekate Phahla</h1>
         <div className="bg-white w-96 p-6 rounded shadow-sm">
           <div className="flex item-center justify-center mb-4">
               <StaticImage
