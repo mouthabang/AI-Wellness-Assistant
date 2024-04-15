@@ -27,11 +27,13 @@
     "gatsby-plugin-webfonts": "^2.3.2",
     "gatsby-source-filesystem": "^5.12.1",
     "gatsby-transformer-sharp": "^5.12.3",
+    "openai": "^4.33.1",
     "postcss": "^8.4.32",
     "react": "^18.2.0",
     "react-audio-voice-recorder": "^2.2.0",
     "react-chartjs-2": "^4.0.0",
     "react-dom": "^18.2.0",
+    "react-dotenv": "^0.1.3",
     "react-helmet": "^6.1.0",
     "react-media-recorder": "^1.6.6",
     "react-router-dom": "^6.20.1",
@@ -40,5 +42,10 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
+  },
+  "react-dotenv": {
+    "whitelist": [
+      "OPENAI_API_KEY"
+    ]
   }
 }

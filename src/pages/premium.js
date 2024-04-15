@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, navigate } from "gatsby-link";
+import {  navigate } from "gatsby-link";
 import Seo from "../components/Seo/seo";
 import dataUsageJsonData from '../data/datausage.json';
 
-import { Chart, Line } from 'react-chartjs-2';
 import { StaticImage } from "gatsby-plugin-image";
 
 const PremiumPage = () => {
@@ -12,29 +11,11 @@ const PremiumPage = () => {
     const [dataUsage, setDataUsage] = useState([]);
 
     useEffect(() => {
-        // Fetch Excel file.
         console.log("FetchingData");
         setDataUsage(dataUsageJsonData);
-        {/*
-            fetch("/DataUsage.xlsx")
-                // Convert to ArrayBuffer.
-                .then((res) =>  res.arrayBuffer())
-                .then((data) => {
-                    const wb = XLSX.read(data, { type: "buffer" });
-                    const wsname = wb.SheetNames[0];
 
-                let value =  wb.SheetNames.forEach(function (sheetName) {
-                        var XL_row_object = XLSX.utils.sheet_to_row_object_array(wb.Sheets[
-                            sheetName]);
-                        var json_object = JSON.stringify(XL_row_object);
-                        setData(json_object);
-                        return json_object; 
-                    });
-                });
- */}
         console.log(dataUsage);
     }, []);
-
 
 
     return (
@@ -97,48 +78,6 @@ const PremiumPage = () => {
 
                 </div>
             </main>
-            { /* 
-    <main className="flex items-center justify-center h-screen bg-gray-100">
-      <form  onSubmit={handleSubmit}>
-
-        <h1 className="mb-4 text-center text-3xl ">Hi Masekate Mokotjo</h1>
-        <div className="bg-white w-96 p-6 rounded shadow-sm">
-          <div className="flex item-center justify-center mb-4">
-              <StaticImage
-              style={{ height: "80px", width: "80px" }}
-                  alt="privacyPic1"
-                  className="rounded-t-lg"
-                  src="../images/logo.webp"
-              />
-          </div>
-          <ErrorMessages
-                    displayErrorMessage={displayErrorMessage}
-                    setDisplayErrorMessage={setDisplayErrorMessage} />
-         
-          <label className="text-gray-700">Email:
-          <input 
-             onChange={(e) => setEmail(e.target.value)}
-
-          className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username@vodacom.co.ls"
-          type="email"/>
-          </label>
-
-        
-          <label className="text-gray-900">Password:
-          <input 
-             onChange={(e) => setPassword(e.target.value)}
-
-          className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=""
-                 type="password"/>
-          </label>
-
-          <button type="submit" className="bg-red-500 w-full text-gray-100 py-2 rounded hover:blue-600 transition-colors"  >Login</button>
-
-        </div>
-      </form>
-
-    </main>
-  */}
         </>
     )
 }

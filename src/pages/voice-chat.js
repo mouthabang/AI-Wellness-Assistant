@@ -1,103 +1,40 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Seo from "../components/Seo/seo";
-import { ReactMediaRecorder } from 'react-media-recorder';
-import axios from "axios";
-import AWS from 'aws-sdk';
-import TranscribeService from "aws-sdk/clients/transcribeservice";
 
 
-const PremiumPage = () => {
+const VoiceChat = () => {
     const [micState, setMicState] = useState('');
-    const [gifVisible, setGifVisible] = useState(false);
-    const toggleGif = () => {
-        setGifVisible(!gifVisible);
-    }
+    const [transcript, setTranscript] = useState("");
+    const [showIntro, setshowIntro] = useState(true);
+    const [isListening, setIsListening] = useState(false);
+    const [recognitionApp, setrecognitionApp] = useState(null);
 
-    const [isRecording, setIsRecording] = useState(false);
-    const toggleMic = () => {
-        setIsRecording(!isRecording)
+    const startSpeechRecognition = () => {
+        setIsListening(!isListening);
+        setshowIntro(false);
+       
+        if (isListening == false) {
+        const recognition = new window.webkitSpeechRecognition(); // Create SpeechRecognition instance
+        
+        recognition.lang = "en-US"; // Set recognition language
+        recognition.continuous = true;
+        recognition.interimResults = true
+
+        setrecognitionApp(recognition);
+        // Event listener for when speech is recognized
+        
+        recognition.onresult = event => {
+            const resultIndex = event.resultIndex;
+            const transcript = event.results[resultIndex][0].transcript;
+            setTranscript(transcript);
+            setMicState(transcript)
+        }; 
+            recognition.start();
+        } else { 
+            recognitionApp.stop();
+        }
+        // Start speech recognition
     };
-
-    async function handleSubmit(mediaUrl) {
-        const audioBlob = await fetch(mediaUrl).then((r) => r.blob());
-        const audioFile = new File([audioBlob], 'inputVoice.wav', { type: 'audio/wav' });
-        const AWS = require('aws-sdk');
-
-        // Set the AWS credentials and region
-     
-
-        // AWS S3 configuration
-        const transcribeService = new TranscribeService();
-        const s3 = new AWS.S3();
-
-
-        // Define parameters for the upload
-        const params = {
-            Bucket: 'faw2024voicechat',
-            Key: audioFile.name,
-            Body: audioFile,
-            ContentType: 'audio/wav'
-        };
-
-        // Upload file to S3 bucket
-        s3.upload(params, (err, data) => {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log('File uploaded successfully:', data.Location);
-                const paramsAWSTranscribe = {
-                    TranscriptionJobName: 'InputJob',
-                    LanguageCode: 'en-US',
-                    MediaFormat: 'wav',
-                    Media: {
-                        MediaFileUri: 's3://faw2024voicechat/inputVoice.wav'
-                    }
-                };
-                transcribeService.startTranscriptionJob(paramsAWSTranscribe, (err, data) => {
-                    if (err) {
-                        console.error(err);
-                    } else {
-                        if (data.TranscriptionJob.TranscriptionJobStatus == "IN_PROGRESS") {
-                            wait_for_transcription_job("InputJob");
-                        }
-                    }
-                });
-
-
-
-
-            }
-        });
-    }
-
-    function wait_for_transcription_job(job_name) {
-        console.log("Starting Waiting for Transcation Job");
-        const transcribeService = new TranscribeService();
-        transcribeService.getTranscriptionJob({ TranscriptionJobName: job_name }, (err, data) => {
-            if (err) {
-                console.log('Error getting transcription job status:', err);
-            } else {
-                var responseStatus = data.TranscriptionJob.TranscriptionJobStatus;
-                console.log("Transaction Status:", responseStatus);
-                if (responseStatus == 'COMPLETED') {
-                    console.log('Transcription COMPLETE:' , data);
-                }else if (responseStatus == "IN_PROGRESS") {
-                    console.log("Transaction in progress STATUS");
-                    setTimeout(() => {
-                        console.log("Waiting and trying again...");
-                        wait_for_transcription_job(job_name);
-                        console.log("Trying again");
-                    }, 5000); // Check again after 3 seconds
-                }else{
-                    console.log(data);
-                }
-
-            }
-
-        });
-        // transcribeService.startTranscriptionJob(paramsAWSTranscribe, (err, data) => {
-
-    }
 
     return (
         <>
@@ -112,48 +49,33 @@ const PremiumPage = () => {
                     <div className="content-container">
                         <div className="text-center ">
                             <h3 className="listening text-white">
-                                {isRecording
-                                    ?
-                                    <div className="pt-20"> <p>{micState}</p></div>
-                                    :
-                                    <div className="pt-20">
-                                        <p>Hey, Masekate Mokotjo</p>
+                                {showIntro
+                                ?  
+                                <div className="pt-20">
 
-                                        <p>How can I help you?</p>
-                                    </div>
+                                <p>Hey, Masekate Mokotjo </p>
+
+                                <p>How can I help you?</p>
+
+                                </div>
+                                :
+                                <div className="pt-20"> <p>{micState}</p>
+                                </div>
+                              
                                 }
-                            </h3>
 
+                               
+                            </h3>
                         </div>
+                    </div>
+                    <div className="flex justify-center items-center ">
+                        <button className={`mic-toggle ${isListening ? 'clicked' : ''}`} id="mic">
+                            <span onClick={startSpeechRecognition} className="material-icons">mic</span>
+                        </button>
 
                     </div>
-                    <ReactMediaRecorder
-                        audio
-                        render={({ startRecording, stopRecording, mediaBlobUrl }) => (
 
-                            <div className="flex justify-center items-center ">
-                                <button className={`mic-toggle ${isRecording ? 'clicked' : ''}`} id="mic">
-                                    <span onClick={() => {
-                                        setIsRecording(!isRecording)
 
-                                        if (isRecording == false) {
-                                            startRecording();
-                                            setMicState("Listening...");
-                                        } else {
-                                            stopRecording();
-                                            setMicState("Converting word to text...")
-                                            handleSubmit(mediaBlobUrl);
-                                        }
-                                    }} className="material-icons">mic</span>
-                                </button>
-                                {mediaBlobUrl && (
-                                    <audio hidden src={mediaBlobUrl} controls />
-                                )}
-
-                            </div>
-
-                        )}
-                    />
                 </div>
 
             </main>
@@ -162,4 +84,5 @@ const PremiumPage = () => {
     )
 }
 
-export default PremiumPage;
+
+export default VoiceChat;
