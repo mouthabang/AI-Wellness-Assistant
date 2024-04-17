@@ -42,10 +42,5 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
-  },
-  "react-dotenv": {
-    "whitelist": [
-      "OPENAI_API_KEY"
-    ]
   }
 }
