@@ -44,7 +44,7 @@ const PremiumPage = () => {
                             </div>
 
                         </div>
-                        <div className="text-center p-10 text-white border-2 border-blue-500/100">
+                        <div onClick={() => navigate("/text-chat")} className="text-center p-10 text-white border-2 border-blue-500/100">
                             <div>
                                 <span className="material-icons">chat</span>
                             </div>

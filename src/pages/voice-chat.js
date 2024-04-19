@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Seo from "../components/Seo/seo";
-import audioSrc from "../data/recommendations/speech_20240417103820216.mp3";
+import audioSrc from "../data/recommendations/british/one.mp3";
 
 
 const VoiceChat = () => {
@@ -25,7 +25,7 @@ const VoiceChat = () => {
     const startSpeechRecognition = () => {
         setIsListening(!isListening);
         setshowIntro(false);
-
+        
         if (isListening == false) {
             const recognition = new window.webkitSpeechRecognition(); // Create SpeechRecognition instance
 
@@ -74,19 +74,15 @@ const VoiceChat = () => {
                                     </div>
                                     :
                                     <div className="pt-10"> <p>{micState}</p>
-                                    
-                                    </div> 
-                                    
-                                
-                                }
 
+                                    </div>                                     
+                                }
                             </h3>
                             <div className="wave">
                                  <audio ref={audioRef} src={audioSrc}></audio>
                             </div>
                         </div>
                     </div>
-
                     <div className="flex justify-center items-center ">
                         <button className={`mic-toggle ${isListening ? 'clicked' : ''}`} id="mic">
                             <span onClick={startSpeechRecognition} className="material-icons">mic</span>

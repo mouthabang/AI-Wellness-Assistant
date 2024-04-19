@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import {  navigate } from "gatsby-link";
+import { navigate } from "gatsby-link";
 import Seo from "../components/Seo/seo";
-
+import recOne from "../data/recommendations/british/one.mp3";
+import recTwo from "../data/recommendations/british/two.mp3";
 
 const IndexPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +10,63 @@ const IndexPage = () => {
   let [password, setPassword] = useState("");
   let [displayErrorMessage, setDisplayErrorMessage] = useState("");
 
+  const [isvoicePlay, setIsVoicePlay] = useState(false);
+  const audioRef = useRef();
 
+  const [audioSrc, setAudioSrc] = useState();
+
+  const recomendationData = [
+    {
+      text: "We notice you buy electricity on the 20th. Did you know, you can double your units buy purchasing on the 1st week of every month.",
+      imageSRC: "https://upload.wikimedia.org/wikipedia/en/f/f1/Tycho_-_Epoch.jpg",
+      audioSRC: recOne,
+      desc: "recOne",
+      title: "LEC"
+    },
+    {
+      text: "There are 10 days left before your school fee recuring bill is due on the 20th.",
+      imageSRC: "https://upload.wikimedia.org/wikipedia/en/f/f1/Tycho_-_Epoch.jpg",
+      audioSRC: recTwo,
+      desc: "recTwo",
+      title: "Pay bill"
+    }
+  ]
+
+  const subscriptionData = [
+    {
+      text: "Your M-Pate Sheleng subscription is due to be paid in 3 days",
+      imageSRC: "https://upload.wikimedia.org/wikipedia/en/f/f1/Tycho_-_Epoch.jpg",
+      audioSRC: recTwo,
+      desc: "recTwo",
+      title: "M-Pate Sheleng"
+    }
+  ]
+  const playAndPause = (voice) => {
+    setIsVoicePlay(!isvoicePlay);
+    console.log(voice);
+
+    if (isvoicePlay) {
+      //   console.log(audioSrc);
+      setAudioSrc(recOne);
+      if (voice == "recOne") {
+        setAudioSrc(recOne);
+        const audio = new Audio(recOne);
+        audio.play()
+      }
+
+      if (voice == "recTwo") {
+        setAudioSrc(recTwo);
+        const audio = new Audio(recTwo);
+        audio.play()
+      }
+
+    } else {
+      //    audioRef.current.pause();
+    }
+
+
+
+  }
 
   return (
     <>
@@ -30,38 +87,43 @@ const IndexPage = () => {
               <div>
                 <h3 className="name-heading pb-5 text-white">Premium Plan</h3>
                 <p className="pb-10 text-white"> Unlock your assistant & get all Premium Features</p>
-
                 <button onClick={() => navigate("/premium")} className="bg-blue-500 rounded-xl w-full text-sm text-gray-100 p-5 rounded hover:blue-600 transition-colors">Unlock F.A.W</button>
-
               </div>
-              <div>
-
-              </div>
-
             </div>
           </div>
 
-
           <div>
+            <h3 className="pb-5 pt-5  font-bold text-gray-200 ">Recommendations</h3>
+            <main className="grid">
+              <div>
+                <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-            <h3 className="text-white pb-5 pt-5">Recommendations:</h3>
+                  {recomendationData.map((item, index) => (
 
-            <div id="alert-additional-content-3" className="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-              <div className="flex items-center">
-                <svg className="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span className="sr-only">Info</span>
-                <h3 className="text-lg font-medium">Double your electricity units</h3>
-              </div>
-              <div className="mt-2 mb-4 text-sm">
-                We notice you buy electricity on the 20th. Did you know, you can double your units buy purchasing on the 1st week of every month.
-              </div>
-              <div className="flex">
-               
-              </div>
-            </div>
+                    <div key={index} id="alert-additional-content-1" className="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+                      <div className="flex items-center">
+                        <svg className="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span className="sr-only">Info</span>
+                        <h3 className="text-lg font-medium">{item.title}</h3>
+                      </div>
+                      <div className="mt-2 mb-4 text-sm">
+                        {item.text}
+                      </div>
+                      <div  >
+                      <svg onClick={() => playAndPause(item.desc)}  xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                          </svg>
+                        <button className="text-white opacity-1 ">
+                        </button>
+                      </div>
+                    </div>
 
+                  ))}
+                </section>
+              </div>
+            </main>
           </div>
 
           <div>
@@ -81,7 +143,6 @@ const IndexPage = () => {
               </div>
             </div>
 
-
             <div id="alert-additional-content-1" className="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
               <div className="flex items-center">
                 <svg className="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -91,11 +152,8 @@ const IndexPage = () => {
                 <h3 className="text-lg font-medium">Pay bill</h3>
               </div>
               <div className="mt-2 mb-4 text-sm">
-                There are 10 days left before your school fee recuring bill is due on the 20th.
               </div>
-              
             </div>
-
           </div>
           {/* 
           <h4>Your Monthly data to date:</h4>
